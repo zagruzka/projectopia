@@ -1,7 +1,15 @@
-const Sidebar = () => {
-    return (
-        <div className="fixed w-60 h-full bg-red-500 top-0 left-0">
+"use client"
 
+import { useAtom } from "jotai"
+import { sidebarStore } from "../state/sidebar"
+
+const Sidebar = () => {
+
+    const [expand] = useAtom(sidebarStore)
+
+    return (
+        <div className={"bg-white shadow duration-300 "+(expand ? 'w-64' : 'w-0')}>
+            {JSON.stringify(expand)}
         </div>
     )
 }
