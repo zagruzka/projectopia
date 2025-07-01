@@ -1,24 +1,23 @@
+import Table from "@/app/components/Table"
+
 const Request = () => {
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Purchase Request</h1>
-            <p>Here you can input purchase request.</p>
+        <div className="p-2">
+            <h1 className="mb-2">Purchase Request</h1>
+            <div className="flex-1 bg-white shadow rounded p-6">
+                <Table
+                    columns={[
+                        { title: 'ID', data: 'id', sortable: true },
+                        { title: 'Title', data: 'title', sortable: true },
+                        { title: 'Description', data: 'description' },
+                        { title: 'Status', data: 'status', sortable: true },
+                        { title: 'Created At', data: 'createdAt', sortable: true }
+                    ]}
+                    rows={[]}
+                    loading={false}
+                />
+            </div>
         </div>
     )
 }
-export default Request;
-
-export const metadata = {
-    title: "Request",
-    description: "Request purchase requests",
-}
-
-export const dynamic = 'force-dynamic'
-
-export const revalidate = 0
-
-// This is a placeholder for the Request page.
-// You can replace this with your actual Request logic and components.
-
-// Note: The metadata and revalidate settings are used for Next.js dynamic routing and caching.
-// The `dynamic` export ensures that this page is always rendered on the server, and `revalidate` set to 0 means it will not cache the page.
+export default Request

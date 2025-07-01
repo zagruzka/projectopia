@@ -17,7 +17,7 @@ const Sidebar = () => {
     const path = usePathname()
 
     const [menu, setMenu] = useState([
-        { name: "Dashboard", icon: <MdOutlineSpaceDashboard size={25} />, href: '#' },
+        { name: "Dashboard", icon: <MdOutlineSpaceDashboard size={25} />, href: '/dashboard' },
         { name: "Purchace", icon: <MdOutlineShoppingCart size={25} />, subMenu: [
             { name: "Request", href: '/purchase/request', icon: <LuConciergeBell size={25} /> },
             { name: "Review", href: '/purchase/review', icon: <TbFileSearch size={25} /> },
@@ -38,7 +38,7 @@ const Sidebar = () => {
             menu.map((i, key) => (
                 <div key={key}>
                     {
-                    i.subMenu?.length && !i.href ?
+                    i.subMenu?.length ?
                     <>
                     <button onClick={() => setExpandKey(expendKey === key ? null : key)}
                     className="flex justify-between items-center w-full p-2 hover:bg-slate-200 rounded">
@@ -57,7 +57,7 @@ const Sidebar = () => {
                     </div>
                     </>
                     :
-                    <Link href={i.href} className="flex gap-2 p-2 hover:bg-slate-200 rounded">
+                    <Link href={i.href || '#'} className="flex gap-2 p-2 hover:bg-slate-200 rounded">
                         {i.icon}{i.name}
                     </Link>
                     }
