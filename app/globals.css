@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.input {
+    @apply bg-slate-100 rounded p-2 border border-slate-400 outline-blue-500;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
