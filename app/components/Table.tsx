@@ -60,52 +60,54 @@ const Table: React.FC<TableProps> = ({columns, rows, pagination=15, loading=fals
 
   return (
     <>
-    <table className='w-full border border-slate-200 shadow rounded' style={style}>
-      <thead>
-        <tr>
-          {
-            columns.map((column, index) => (
-              <th className='bg-slate-200 px-2 py-1' key={index} onClick={() => column.sortable ? handleSort(column.data) : undefined}>
-                <span className={'flex items-center ' + (column.sortable && 'cursor-pointer hover:text-cyan-700')}>
-                {column.title}
-                {
-                  sortConfig.key === column.data ? sortConfig.direction === 'asc'
-                  ? <FaSortUp className='ms-1' />
-                  : <FaSortDown className='ms-1' />
-                  : ''
-                }
-                </span>
-              </th>
-            ))
-          }
-        </tr>
-      </thead>
-      <tbody>
-        {
-          loading ?
+    <div className='border border-slate-200 shadow rounded' style={style}>
+      <table className='w-full'>
+        <thead>
           <tr>
-            <td className='border py-4' colSpan={columns.length}>
-              <FaSync style={{ animation: 'spin 1s infinite linear', margin: 'auto' }} size={25} />
-            </td>
-        </tr>
-          :
-          rows.length ?
-          pageRows.map((row, index) => (
-            <tr key={index} className={index % 2 ? '' : 'bg-slate-600'}>
-              {columns.map((column: columnType, index) => (
-                <td key={index} className='px-2 py-1' style={column.style}>
-                  { column.render ? column.render(row) : column.command ? column.command(row) : row[column.data] }
-                </td>
-              ))}
-            </tr>
-          ))
-          :
-          <tr>
-            <td className='text-center py-4' colSpan={columns.length}>NO DATA</td>
+            {
+              columns.map((column, index) => (
+                <th className='bg-slate-200 px-2 py-1' key={index} onClick={() => column.sortable ? handleSort(column.data) : undefined}>
+                  <span className={'flex items-center ' + (column.sortable && 'cursor-pointer hover:text-cyan-700')}>
+                  {column.title}
+                  {
+                    sortConfig.key === column.data ? sortConfig.direction === 'asc'
+                    ? <FaSortUp className='ms-1' />
+                    : <FaSortDown className='ms-1' />
+                    : ''
+                  }
+                  </span>
+                </th>
+              ))
+            }
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {
+            loading ?
+            <tr>
+              <td className='border py-4' colSpan={columns.length}>
+                <FaSync style={{ animation: 'spin 1s infinite linear', margin: 'auto' }} size={25} />
+              </td>
+          </tr>
+            :
+            rows.length ?
+            pageRows.map((row, index) => (
+              <tr key={index} className={index % 2 ? '' : 'bg-slate-600'}>
+                {columns.map((column: columnType, index) => (
+                  <td key={index} className='px-2 py-1' style={column.style}>
+                    { column.render ? column.render(row) : column.command ? column.command(row) : row[column.data] }
+                  </td>
+                ))}
+              </tr>
+            ))
+            :
+            <tr>
+              <td className='text-center py-4' colSpan={columns.length}>NO DATA</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
     <div className='flex justify-center items-center mt-4'>
       <button className='bg-slate-300 size-10 rounded-full hover:bg-slate-400 disabled:bg-slate-100 disabled:text-slate-500'
       onClick={() => setPage(pv => pv-1)} disabled={page <= 1}>

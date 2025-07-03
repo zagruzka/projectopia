@@ -4,6 +4,10 @@
     @apply bg-slate-100 rounded p-2 border border-slate-400 outline-blue-500;
 }
 
+.button-green {
+    @apply bg-green-500 hover:bg-green-600 text-white p-2 rounded;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

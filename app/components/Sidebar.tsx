@@ -49,7 +49,7 @@ const Sidebar = () => {
                         <div className="flex flex-col gap-1 border-l-2 border-slate-400 ms-4 ps-1 pt-1">
                             {i.subMenu.map((sub, subKey) => (
                                 <Link key={subKey} href={sub.href}
-                                className={"flex gap-2 p-2 hover:bg-slate-200 rounded "+(path === sub.href ? 'bg-slate-200 text-cyan-700' : '')}>
+                                className={"flex gap-2 p-2 hover:bg-slate-200 rounded "+(path === sub.href ? 'bg-slate-200 text-blue-500' : '')}>
                                     {sub.icon}{sub.name}
                                 </Link>
                             ))}
