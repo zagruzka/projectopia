@@ -7,6 +7,12 @@
 .button-green {
     @apply bg-green-500 hover:bg-green-600 text-white p-2 rounded;
 }
+.button-blue {
+    @apply bg-blue-500 hover:bg-blue-600 text-white p-2 rounded;
+}
+.button-red {
+    @apply bg-red-500 hover:bg-red-600 text-white p-2 rounded;
+}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
