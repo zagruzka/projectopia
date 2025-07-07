@@ -13,6 +13,7 @@ const Approval = () => {
     const [detailModal, setDetailModal] = useState(false)
 
     const reqDetail = {
+        Priority: 'high',
         List: [
             { ItemName: 'Honda HRV', Qty: 1, Unit: 'unit', Description: 'Buat nganter sembako' },
             { ItemName: 'Beras', Qty: 1, Unit: 'kg', Description: 'Buat makan' },

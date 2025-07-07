@@ -24,6 +24,7 @@ const RequestLog = () => {
 
     const requestList = [
         {
+            Priority: 'high',
             List: [
                 { ItemName: 'Honda HRV', Qty: 1, Unit: 'unit', Description: 'Buat nganter sembako' },
                 { ItemName: 'Beras', Qty: 1, Unit: 'kg', Description: 'Buat makan' },
@@ -35,6 +36,7 @@ const RequestLog = () => {
             ]
         },
         {
+            Priority: 'high',
             List: [
                 { ItemName: 'Mini PC i5 gen 13', Qty: 1, Unit: 'pcs', Description: 'Untuk karyawan baru' },
                 { ItemName: 'Monitor', Qty: 1, Unit: 'pcs', Description: '-' },

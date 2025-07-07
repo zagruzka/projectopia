@@ -18,7 +18,7 @@ const Sidebar = () => {
 
     const [menu] = useState([
         { name: "Home", icon: <TbHome size={25} />, href: '#' },
-        { name: "Purchace", icon: <MdOutlineShoppingCart size={25} />, subMenu: [
+        { name: "Purchasing", icon: <MdOutlineShoppingCart size={25} />, subMenu: [
             { name: "Request", href: '/purchase/request', icon: <LuConciergeBell size={25} /> },
             { name: "Review", href: '/purchase/review', icon: <TbFileSearch size={25} /> },
             { name: "Approval", href: '/purchase/approval', icon: <TbFileCheck size={25} /> }

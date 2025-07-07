@@ -1,7 +1,9 @@
+import { priorityColor } from "../utils/colors"
 import Table from "./Table"
 
 type ReqDetailType = {
     data: {
+        Priority: string,
         List: any[],
         Remarks: string,
         Timeline: any[]
@@ -24,7 +26,7 @@ const RequestDetail: React.FC<ReqDetailType> = ({ data }) => {
             <div className="flex gap-20 mb-5">
                 <div>
                     <div className="text-xs">Request By</div>
-                    <div>Fauzi Ahmad</div>
+                    <div>{data.Timeline[0].CreatedBy}</div>
                 </div>
                 <div>
                     <div className="text-xs">Dept</div>
@@ -32,11 +34,11 @@ const RequestDetail: React.FC<ReqDetailType> = ({ data }) => {
                 </div>
                 <div>
                     <div className="text-xs">Request Date</div>
-                    <div>2025-01-01</div>
+                    <div>{data.Timeline[0].CreatedDate}</div>
                 </div>
                 <div>
                     <div className="text-xs">Priority</div>
-                    <div className="bg-red-200 rounded-full px-2">High</div>
+                    <div className={"rounded w-20 text-center "+priorityColor(data.Priority)}>{data.Priority}</div>
                 </div>
             </div>
             <Table showPage={false}

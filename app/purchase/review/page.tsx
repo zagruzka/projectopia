@@ -7,12 +7,14 @@ import Modal from "@/app/components/Modal"
 import RequestDetail from "@/app/components/RequestDetail"
 import { useState } from "react"
 import TextareaAutosize from 'react-textarea-autosize'
+import { priorityColor } from "@/app/utils/colors"
 
 const Review = () => {
 
     const [detailModal, setDetailModal] = useState(false)
 
     const reqDetail = {
+        Priority: 'high',
         List: [
             { ItemName: 'Mini PC i5 gen 13', Qty: 1, Unit: 'pcs', Description: 'Untuk karyawan baru' },
             { ItemName: 'Monitor', Qty: 1, Unit: 'pcs', Description: '-' },
@@ -27,12 +29,13 @@ const Review = () => {
         { title: 'Date', data: 'CreatedDate', sortable: true },
         { title: 'Request By', data: 'CreatedBy', sortable: true },
         { title: 'Item', data: 'ItemSample', sortable: true },
+        { title: 'Priority', data: 'Priority', render: (r) => <div className={'w-20 text-center rounded '+priorityColor(r.Priority)}>{r.Priority}</div>, sortable: true },
         { title: 'Detail', style: {width: '0px', textAlign: 'center'}, render: (r) =>
         <button onClick={() => onDetail(r)} className="bg-blue-500 hover:bg-blue-600 text-white rounded px-3 py-1"><FaChevronRight /></button>}
     ]
 
     const rows = [
-        { CreatedDate: '2025-01-02', CreatedBy: 'Fauzi', ItemSample: 'Mini PC...' }
+        { CreatedDate: '2025-01-02', CreatedBy: 'Fauzi', ItemSample: 'Mini PC...', Priority: 'high' }
     ]
 
     const onDetail = (data: any) => {
