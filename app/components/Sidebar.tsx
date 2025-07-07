@@ -4,11 +4,11 @@ import { useAtom } from "jotai"
 import { sidebarStore } from "../state/sidebar"
 import Image from "next/image"
 import { useState } from "react"
-import { MdChevronRight, MdOutlineShoppingCart, MdOutlineSpaceDashboard } from "react-icons/md"
+import { MdChevronRight, MdOutlineShoppingCart } from "react-icons/md"
 import { LuConciergeBell } from "react-icons/lu"
-import { TbFileCheck, TbFileSearch } from "react-icons/tb"
+import { TbFileCheck, TbFileSearch, TbHome } from "react-icons/tb"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 const Sidebar = () => {
 
@@ -16,20 +16,16 @@ const Sidebar = () => {
 
     const path = usePathname()
 
-    const [menu, setMenu] = useState([
-        { name: "Dashboard", icon: <MdOutlineSpaceDashboard size={25} />, href: '/dashboard' },
+    const [menu] = useState([
+        { name: "Home", icon: <TbHome size={25} />, href: '#' },
         { name: "Purchace", icon: <MdOutlineShoppingCart size={25} />, subMenu: [
             { name: "Request", href: '/purchase/request', icon: <LuConciergeBell size={25} /> },
             { name: "Review", href: '/purchase/review', icon: <TbFileSearch size={25} /> },
-            { name: "Approve", href: '/purchase/approval', icon: <TbFileCheck size={25} /> }
+            { name: "Approval", href: '/purchase/approval', icon: <TbFileCheck size={25} /> }
         ] }
     ])
 
     const [expendKey, setExpandKey] = useState<number | null>(null)
-
-    const handleExpand = (key: number) => {
-
-    }
 
     return (
         <div className={"flex flex-col gap-1 bg-white shadow duration-300 px-2 w-56 "+(!open && '-ms-56')}>

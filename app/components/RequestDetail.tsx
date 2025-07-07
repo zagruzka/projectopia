@@ -1,11 +1,29 @@
 import Table from "./Table"
 
-const RequestDetail = () => {
+type ReqDetailType = {
+    data: {
+        List: any[],
+        Remarks: string,
+        Timeline: any[]
+    }
+}
+
+const RequestDetail: React.FC<ReqDetailType> = ({ data }) => {
+
+    const columns = [
+        { title: 'Item Name', data: 'ItemName' },
+        { title: 'Qty', data: 'Qty' },
+        { title: 'Unit', data: 'Unit' },
+        { title: 'Description', data: 'Description' },
+    ]
+
+    if (!data) return
+
     return (
         <>
             <div className="flex gap-20 mb-5">
                 <div>
-                    <div className="text-xs">Applicant</div>
+                    <div className="text-xs">Request By</div>
                     <div>Fauzi Ahmad</div>
                 </div>
                 <div>
@@ -21,39 +39,38 @@ const RequestDetail = () => {
                     <div className="bg-red-200 rounded-full px-2">High</div>
                 </div>
             </div>
-            <Table paginator={false}
-                columns={[
-                    { title: 'Item Name', data: 'ItemName' },
-                    { title: 'Qty', data: 'Qty' },
-                    { title: 'Description', data: 'Description' },
-                ]}
-                rows={[
-                    { ItemName: 'Honda HRV', Qty: 1, Desc: 'Buat nganter sembako' },
-                    { ItemName: 'Beras', Qty: 1, Desc: 'Buat makan' },
-                ]}
+            <Table showPage={false}
+                columns={columns}
+                rows={data.List}
             />
             <div className="bg-yellow-100 w-full p-4 mt-4 rounded">
                 <div className="font-bold">Note:</div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui delectus totam veritatis corporis quia saepe, earum incidunt cupiditate explicabo esse.
+                {data.Remarks}
             </div>
             <div className="bg-blue-100 p-4 mt-4 rounded">
                 <div className="font-bold">Timeline</div>
                 <div className="flex w-full mt-5">
                 {
-                ['Request', 'Review', 'Approval'].map((i, key) => (
+                ['Request', 'Review', 'Approval'].map((i, key) => {
+                    const found = data.Timeline.find(r => r.Status === i)
+                    return (
                     <div key={key} className="flex flex-col items-center gap-1">
-                        <div>{i}</div>
+                        <div className="font-bold">{i}</div>
                         <div className="flex items-center">
-                            <div className={"w-20 h-0.5 "+(key !== 0 && 'bg-black')}></div>
-                            <div className="flex flex-col items-center justify-center gap-5 size-5 bg-green-500 border rounded-full"></div>
-                            <div className={"w-20 h-0.5 "+(key !== 2 && 'bg-black')}></div>
+                            <div className={"w-20 h-0.5 " + (key !== 0 ? 'bg-black' : '')}></div>
+                            <div className={
+                                "flex flex-col items-center justify-center gap-5 size-5 border rounded-full " +
+                                (found ? found.Approved ? "bg-green-500" : "bg-red-500" : "bg-slate-400")
+                            }></div>
+                            <div className={"w-20 h-0.5 " + (key !== 2 ? 'bg-black' : '')}></div>
                         </div>
                         <div className="text-center text-sm">
-                            <div>By: Fauzi</div>
-                            <div>On: 2025-01-01</div>
+                            <div>By: {found ? found.CreatedBy : '...'}</div>
+                            <div>On: {found ? found.CreatedDate : '...'}</div>
                         </div>
                     </div>
-                ))
+                    )
+                })
                 }
                     <div className="p-4 rounded border">
                         <div className="flex gap-2">

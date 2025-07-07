@@ -1,21 +1,27 @@
 import { ReactNode, useEffect, useState } from "react"
 
-type ModalType = {
-    children: ReactNode,
-    open: boolean,
-    onClose: () => void,
-    outerClose?: boolean,
-    escClose?: boolean
-}
+type ClosableModal = {
+  children: ReactNode;
+  open: boolean;
+  closable?: true;
+  onClose: () => void;
+};
 
-const Modal:React.FC<ModalType> = ({ children, open, onClose, outerClose = true, escClose = true }) => {
+type NonClosableModal = {
+  children: ReactNode;
+  open: boolean;
+  closable: false;
+  onClose?: undefined;
+};
+
+const Modal:React.FC<ClosableModal|NonClosableModal> = ({ children, open, closable = true, onClose }) => {
 
     const [animate, setAnimate] = useState(false)
 
     useEffect(() => {
         const onEscape = (e: KeyboardEvent) => {
-            if (escClose && e.key === "Escape") {
-                onClose()
+            if (closable && e.key === "Escape") {
+                if (onClose) onClose()
             }
         }
 
@@ -32,7 +38,7 @@ const Modal:React.FC<ModalType> = ({ children, open, onClose, outerClose = true,
 
     return (
         <dialog open={open}>
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur overflow-y-auto" onClick={outerClose ? onClose : undefined}>
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur overflow-y-auto" onClick={closable ? onClose : undefined}>
             <div className={"max-w-fit mx-auto duration-300 "+(animate ? '' : 'scale-0')} onClick={e => e.stopPropagation()}>
                 { children }
             </div>

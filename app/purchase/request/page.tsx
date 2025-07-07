@@ -8,6 +8,7 @@ import RequestLog from "./RequestLog"
 type itemListType = {
     ItemName: string,
     Qty: string,
+    Unit: string,
     Desc: string
 }
 
@@ -23,7 +24,7 @@ const Request = () => {
     const addItemList = () => {
         clearTimeout(removeItemTimeout)
         if (!itemList.some(i => !i.ItemName && !i.Qty && !i.Qty)) {
-            setItemList(p => ([...p, { ItemName: '', Qty: '', Desc: '' }]))
+            setItemList(p => ([...p, { ItemName: '', Qty: '', Unit: '', Desc: '' }]))
         }
         setTimeout(() => inputRefs.current[inputRefs.current.length-1]?.focus(), 0)
     }
@@ -34,7 +35,7 @@ const Request = () => {
     }
 
     const handleBlur = (key: number) => {
-        if (!itemList[key].ItemName && !itemList[key].Qty && !itemList[key].Desc) {
+        if (!itemList[key].ItemName && !itemList[key].Qty && !itemList[key].Unit && !itemList[key].Desc) {
             removeItemTimeout = setTimeout(() => removeItem(key), 100)
             keyTimeout = key
         }
@@ -58,6 +59,7 @@ const Request = () => {
                                 <tr className="border-b-2 border-slate-400">
                                     <th className="text-start ps-4 py-1 w-40">Item Name</th>
                                     <th className="text-start ps-4 py-1 w-24">Qty</th>
+                                    <th className="text-start ps-4 py-1 w-24">Unit</th>
                                     <th className="text-start ps-4 py-1 w-40">Description</th>
                                     <th className="py-1 w-0">Delete</th>
                                 </tr>
@@ -95,6 +97,22 @@ const Request = () => {
                                             (key === index ? {...x, Qty: e.target.value} : x)))} />
                                         </td>
                                         <td className="px-2">
+                                            <select
+                                            className="w-full hover:bg-white focus:bg-white outline-blue-500 rounded p-2"
+                                            value={i.Unit}
+                                            onFocus={() => handleFocus(key)}
+                                            onBlur={() => handleBlur(key)}
+                                            onChange={e =>
+                                            setItemList(p =>
+                                            p.map((x, index) =>
+                                            (key === index ? {...x, Unit: e.target.value} : x)))}>
+                                                <option>---</option>
+                                                <option value="pcs">pcs</option>
+                                                <option value="kg">kg</option>
+                                                <option value="m">m</option>
+                                            </select>
+                                        </td>
+                                        <td className="px-2">
                                             <TextareaAutosize
                                             spellCheck={false}
                                             className="w-full hover:bg-white focus:bg-white outline-blue-500 rounded p-2 mt-1 resize-none"
@@ -118,7 +136,7 @@ const Request = () => {
                                 }{
                                 !itemList.length && (
                                     <tr>
-                                        <td colSpan={4} className="bg-slate-100 text-center text-slate-500 py-3">
+                                        <td colSpan={5} className="bg-slate-100 text-center text-slate-500 py-3">
                                             No Request Data
                                         </td>
                                     </tr>
