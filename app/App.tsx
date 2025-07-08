@@ -13,7 +13,7 @@ const App: React.FC<{children: React.ReactNode}> = ({children}) => {
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Navbar />
-        <main className="overflow-y-auto w-full h-full p-4 bg-slate-200">
+        <main className="overflow-y-auto w-full h-full py-4 bg-slate-200">
           {children}
         </main>
       </div>

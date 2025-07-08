@@ -76,12 +76,12 @@ const Request = () => {
 
     return (
         <>
-        <div className="flex flex-wrap gap-2">
-            <div className="flex-1">
+        <div className="flex justify-center flex-wrap gap-2">
+            <div className="w-full lg:max-w-[40rem]">
                 <div className="bg-white shadow rounded p-4">
                     <div className="font-bold text-xl mb-4">Make a Request</div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <div>Priority :</div>
+                    <div className="flex flex-col md:flex-row items-center gap-2 mb-2">
+                        <div>Priority</div>
                         <div className="flex bg-slate-200 p-1 rounded overflow-hidden">
                             <button onClick={() => setPriority('low')} className={"w-20 "+(priority === 'low' && 'bg-cyan-300')}>low</button>
                             <button onClick={() => setPriority('medium')} className={"w-20 "+(priority === 'medium' && 'bg-yellow-300')}>medium</button>
@@ -129,26 +129,12 @@ const Request = () => {
                                         </td>
                                         <td className="px-2">
                                             <input className="w-full hover:bg-white focus:bg-white outline-blue-500 rounded p-2"
-                                            placeholder="Unit"
+                                            placeholder="pcs/dus/kg"
                                             value={i.Unit}
                                             name="Unit"
                                             onFocus={e => {handleFocus(key); e.target.select()}}
                                             onBlur={() => handleBlur(key)}
                                             onChange={e => handleInput(key, e)} />
-                                            {/* <select
-                                            className="w-full hover:bg-white focus:bg-white outline-blue-500 rounded p-2"
-                                            value={i.Unit}
-                                            onFocus={e => {handleFocus(key);  e.target.select()}}
-                                            onBlur={() => handleBlur(key)}
-                                            onChange={e =>
-                                            setReqList(p =>
-                                            p.map((x, index) =>
-                                            (key === index ? {...x, Unit: e.target.value} : x)))}>
-                                                <option>---</option>
-                                                <option value="pcs">pcs</option>
-                                                <option value="kg">kg</option>
-                                                <option value="m">m</option>
-                                            </select> */}
                                         </td>
                                         <td className="px-2">
                                             <TextareaAutosize
@@ -197,7 +183,7 @@ const Request = () => {
                     </div>
                 </div>
             </div>
-            <div className="min-w-max">
+            <div className="w-full lg:w-1/3">
                 <RequestLog />
             </div>
         </div>

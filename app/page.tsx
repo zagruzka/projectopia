@@ -1,8 +1,12 @@
+import { redirect } from "next/navigation"
+
 const Home = () => {
-  return (
-    <div className="w-full h-[90rem] bg-white rounded">
-    </div>
-  )
+  redirect('/purchasing/request')
+  // return (
+  //   <div className="w-full bg-white rounded">
+      
+  //   </div>
+  // )
 }
 
 export default Home
